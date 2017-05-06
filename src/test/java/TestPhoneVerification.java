@@ -40,14 +40,17 @@ public class TestPhoneVerification {
     params.setAttribute("locale", "en");
 
     Verification result = subject.start("282-23", "1", "sms", params);
-    Assert.assertEquals("Phone verification couldn't be created: Phone number is mandatory, Country code is mandatory", result.getMessage());
+    Assert.assertEquals("Phone number is invalid", result.getMessage());
+    Assert.assertEquals("60033", result.getErrorCode());
     Assert.assertEquals("false", result.getSuccess());
   }
 
   @Test
   public void itTestsVerificationCheckNotFound() {
-    Verification result = subject.check("282-23", "1", "2061");
-    Assert.assertEquals("No pending verifications for +1 2-8223 found.", result.getMessage());
+    Verification result = subject.check("555-555-5555", "1", "2061");
+    Assert.assertEquals(404, result.getStatus());
+    Assert.assertEquals("No pending verifications for +1 555-555-5555 found.", result.getMessage());
+    Assert.assertEquals("60023", result.getErrorCode());
     Assert.assertEquals("false", result.getSuccess());
   }
 

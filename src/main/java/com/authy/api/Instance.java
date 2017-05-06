@@ -80,5 +80,10 @@ public class Instance {
   public int getStatus() {
     return this.status;
   }
+
+  public String getMessage() {
+    return this.message;
+  }
+
 }
 

@@ -1,4 +1,4 @@
-<project name="authy-java">
+<project name="authy-java-recurly">
   <target name="init">
     <mkdir dir="build/classes" />
     <mkdir dir="dist" />
@@ -13,7 +13,7 @@
   </target>
 
   <target name="compress" depends="compile">
-    <jar destfile="dist/authy-java.jar"
+    <jar destfile="dist/authy-java-recurly.jar"
          basedir="build/classes"
          excludes="**/Main*.class">
       <zipgroupfileset dir="lib" includes="json-20150729.jar" />

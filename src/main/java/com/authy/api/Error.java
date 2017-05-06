@@ -15,7 +15,16 @@ import javax.xml.bind.annotation.*;
  */
 @XmlRootElement(name="errors")
 public class Error implements Formattable {
-	private String message, url, countryCode;
+	private String errorCode, message, url, countryCode;
+
+	@XmlElement(name="error-code")
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
 
 	@XmlElement(name="country-code")
 	public String getCountryCode() {
@@ -71,20 +80,30 @@ public class Error implements Formattable {
 	 */
 	public Map<String, String> toMap() {
 		Map<String, String> map = new HashMap<String, String>();
-		
+
+		map.put("error-code", errorCode);
 		map.put("message", message);
 		map.put("country-code", countryCode);
 		map.put("url", url);
 		
 		return map;
 	}
-	// required to satisfy Formattable interface
-	public String toJSON(){ return ""; }
+
+	public String toJSON(){
+		org.json.JSONObject info = new org.json.JSONObject();
+
+		info.put("error-code", errorCode);
+		info.put("message", message);
+		info.put("country-code", countryCode);
+		info.put("url", url);
+
+		return info.toString();
+	}
 
 	@Override
 	public String toString() {
-		return "Error [message=" + message + ", url=" + url + ", countryCode="
-				+ countryCode + "]";
+		return "Error [errorCode=" + errorCode + ", message=" + message +
+				", url=" + url + ", countryCode=" + countryCode + "]";
 	}
 
 }

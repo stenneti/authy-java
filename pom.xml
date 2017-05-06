@@ -3,11 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.authy</groupId>
-  <artifactId>authy-java</artifactId>
-  <version>1.1.0</version>
+  <artifactId>authy-java-recurly</artifactId>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
-  <name>Authy Java</name>
-  <description>Java library to access the Authy API.</description>
+  <name>Authy Java Recurly</name>
+  <description>Recurly's fork of Twilio's Java library for Authy API.</description>
   <url>https://github.com/authy/authy-java</url>
 
   <licenses>
@@ -30,12 +30,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <scm>
-    <connection>scm:git:git@github.com:authy/authy-java.git</connection>
-    <developerConnection>scm:git:git@github.com:authy/authy-java.git</developerConnection>
-    <url>git@github.com:authy/authy-java.git</url>
-  </scm>
-
   <dependencies>
     <dependency>
       <groupId>org.json</groupId>
@@ -51,41 +45,16 @@
   </dependencies>
 
   <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <name>Authy Maven Snapshot Repository</name>
-      <url>
-        https://oss.sonatype.org/content/repositories/snapshots/
-      </url>
-    </snapshotRepository>
-
     <repository>
-      <id>ossrh</id>
-      <name>Authy Maven Repository</name>
-      <url>
-        https://oss.sonatype.org/service/local/staging/deploy/maven2/
-      </url>
+      <id>recurly-nexus-prepod-repo</id>
+      <name>Recurly Nexus Releases</name>
+      <url>http://nexus.preprod.recurly.net/nexus/content/repositories/releases/</url>
     </repository>
 
   </distributionManagement>
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.5</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
@@ -131,10 +100,11 @@
         <version>1.6.3</version>
         <extensions>true</extensions>
         <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <serverId>recurly-nexus-prepod-repo</serverId>
+          <nexusUrl>http://nexus.preprod.recurly.net/nexus/</nexusUrl>
+          <skipStaging>true</skipStaging>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
-          <description>authy-java-1.1.0</description>
+          <description>authy-java-recurly-1.0.0</description>
         </configuration>
 
       </plugin>
